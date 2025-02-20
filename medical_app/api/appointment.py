@@ -7,9 +7,11 @@ import time
 @frappe.whitelist()
 def create_appointment(PID, doctor_practitioner, doct_amount):
     create_doc  =frappe.new_doc("Que")
-    create_doc.paid_amount = doct_amount
+    create_doc.payable_amount = doct_amount
     create_doc.patient=PID
+    create_doc.mode_of_payment = "Cash"
     create_doc.practitioner=doctor_practitioner
+    create_doc.cost_center = "Main - HH"
 
 
     create_doc.insert()
@@ -40,7 +42,7 @@ def get_appointments(patient_id=None):
         # Fetch all appointments (Que docs) linked to this patient
         appointments = frappe.get_all(
             "Que",
-            filters={"patient": patient_id},
+            filters={"patient": patient_id, "status": ["!=", "Canceled"]},
             fields=["name", "patient", "practitioner", "paid_amount", "creation"]
         )
 

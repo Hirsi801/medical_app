@@ -17,7 +17,7 @@ def get_all_banners():
         )
 
         # 2. Base URL for serving images (replace with your actual host)
-        system_host_url = "http://104.237.2.9"
+        system_host_url = "http://102.214.169.195"
 
         # 3. Format each banner's image URL
         for banner in banners:
