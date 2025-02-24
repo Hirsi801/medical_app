@@ -4,7 +4,7 @@
 import frappe
 import requests
 import time
-\
+
 
 @frappe.whitelist()
 def get_all_banners():
