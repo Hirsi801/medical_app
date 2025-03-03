@@ -8,11 +8,11 @@ def get_all_doctors():
     try:
         # Fetch all healthcare practitioners (doctors) with their name, charges, department, and image
         doctors = frappe.get_all(
-            "Healthcare Practitioner", 
+            "Healthcare Practitioner",
             filters={"status": "Active"},
             fields=["practitioner_name", "op_consulting_charge", "department", "image", "services"]
         )
-        
+
         # Format the image URLs if available
         system_host_url = "http://102.214.169.195"  # Replace with your actual host URL
         for doctor in doctors:
@@ -23,7 +23,7 @@ def get_all_doctors():
                 doctor.image = f"{system_host_url}{doctor.image}?v={int(time.time())}"
             else:
                 doctor.image = None  # If no image, set it to None
-        
+
         # Return the list of doctors with their formatted image URLs
         frappe.response['http_status_code'] = 200
         return {
